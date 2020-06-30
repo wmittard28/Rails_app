@@ -7,8 +7,47 @@
     </head>
     <body>
 
+    <div class="field">
+    <h5>Title:</h5>
+    <%= f.text_field :name, size: 50, :class => "form-control"%>
+  </div><br>
 
-    <a class="btn btn-primary"  href="/projects/new">New Project</a>
+  <div class="field">
+    <h5>Description:</h5>
+    <%= f.text_area :description, size: 50, :class => "form-control"%>
+  </div><br>
+
+  <div class="field">
+  <h5>Category:</h5>
+  <%= f.collection_select :category_id, Category.all, :id , :name, {:prompt => true}, {class: "form-control"} %>
+</div><br>
+
+  <div class="field">
+  <%= f.label :start_date %><br>
+  <%= f.date_select :start_date, {}, {:class => "form-control custom"} %>
+</div><br>
+
+<div class="field">
+  <%= f.label :end_date %><br>
+  <%= f.date_select :end_date, {}, {:class => "form-control custom"} %>
+</div><br>
+
+
+
+  <div class="actions">
+    <%= f.submit 'Create Project', :class => 'btn btn-primary btn-lg btn-block' %>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

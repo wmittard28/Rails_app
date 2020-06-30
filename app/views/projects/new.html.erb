@@ -1,0 +1,8 @@
+<div class="container" style="width:60%;">
+  <h1>New Project</h1>
+
+  <%= form_for(@project) do |f| %>
+    <%= render 'shared/errors', x: @project %>
+    <%= render 'new_project', f: f %>
+  <% end %>
+</div>
