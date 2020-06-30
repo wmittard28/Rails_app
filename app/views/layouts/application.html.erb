@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ProjectU</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+ <body>
 
-  <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand font-weight-bold" href="/posts">ProjectU</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+  <ul class="navbar-nav ml-auto">
+
+    <li class="nav-item">
+      <a class="nav-link text-white" href="/register">Sign Up</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="/signin">Log In</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white"  href="/signout">Log Out</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white"  href="/projects">View Projects</a>
+    </li>
+
+  </ul>
+  </nav>
+
+  <div id="app-container">
     <%= yield %>
-  </body>
-</html>
+
+    </body>
+
+    </html>
+
