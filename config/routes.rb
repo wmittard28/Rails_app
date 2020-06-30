@@ -25,11 +25,7 @@ Rails.application.routes.draw do
       get'/all', to: 'jobs#all', as: "get_all_jobs"
     end
 
-    resources :projects do
-      resources :notes, shallow: true
-      resources :jobs, shallow: true
-    end
-
-
+    resources :projects
+    
   end
 end

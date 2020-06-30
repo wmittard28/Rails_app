@@ -3,13 +3,12 @@ class ProjectsController < ApplicationController
 
     #GET /projects
     def index
-        @projects_created = Project.where('user_id == ?', current_user.id)
+        @projects = Project.all
+
     @projects_created = @projects_created.status(Project.statuses[params[:status]]) if params[:status].present?
-    @total_projects_count = @projects.length
+    @total_projects_count = @projects
 
-    @projects = @projects.paginate(:page => params[:page], :per_page => 5)
 
-    @departments = Department.all
 
     end
 
@@ -20,13 +19,12 @@ class ProjectsController < ApplicationController
     #GET /Projects/new
     def new
         @project = Project.new
-        @departments = Department.all
+
     end
 
     #GET /projects/1/edit
     def edit
         authorize
-        @departments = Department.all
         @users = User.all
     end
 
@@ -34,7 +32,6 @@ class ProjectsController < ApplicationController
     def create
         @project = Project.new(project_params)
         @project.user_id = current_user.id
-        @departments = Department.all
         if @project.save
             redirect_to :index
         else
@@ -46,7 +43,6 @@ class ProjectsController < ApplicationController
     def update
         authorize
         @project.user_id = current_user.id
-        @departments = Department.all
         if @project.update(project_params)
             redirect_to project_path(@project)
         else
@@ -76,8 +72,8 @@ class ProjectsController < ApplicationController
         if current_user != @project.user
           render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
         end
-      end
     end
+
 
 
 

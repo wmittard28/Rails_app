@@ -1,0 +1,35 @@
+<div class="authform">
+  <%= form_for(@project) do |f| %>
+      <%= display_error_messages(@project) %>
+      <fieldset>
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :department %><br>
+          <% departments = options_from_collection_for_select(@departments, 'id', 'name') %>
+          <%= f.select :department_id, departments, {:prompt => true}, {:class => 'form-control custom'} %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :status %><br>
+          <%= f.select :status, Project.statuses.keys.map { |status| [status.titleize, status] }, {}, class: 'form-control custom' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :description %><br>
+          <%= f.text_field :description, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :start_date %><br>
+          <%= f.date_select :start_date, {}, {:class => "form-control custom"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :end_date %><br>
+          <%= f.date_select :end_date, {}, {:class => "form-control custom"} %>
+        </div>
+        <%= f.submit 'Submit', :class => 'btn btn-lg btn-primary' %>
+      </fieldset>
+
+  <% end %>
+</div>
