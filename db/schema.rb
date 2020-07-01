@@ -10,64 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_135324) do
+ActiveRecord::Schema.define(version: 2020_07_01_162617) do
 
-  create_table "notes", force: :cascade do |t|
-    t.text "step"
-    t.integer "project_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_notes_on_project_id"
-  end
-
-  create_table "project_categories", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "category_id"
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "project_tasks", force: :cascade do |t|
-    t.integer "task_id"
-    t.integer "project_id"
+  create_table "job_applications", force: :cascade do |t|
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_project_tasks_on_project_id"
-    t.index ["task_id"], name: "index_project_tasks_on_task_id"
-  end
-
-  create_table "projects", force: :cascade do |t|
+    t.integer "company_id"
     t.integer "user_id"
-    t.string "name"
-    t.string "description"
-    t.date "start_date"
-    t.date "due_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
-    t.index ["username"], name: "index_projects_on_username", unique: true
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.string "name"
-    t.integer "project_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.string "position"
+    t.index ["company_id"], name: "index_job_applications_on_company_id"
+    t.index ["user_id"], name: "index_job_applications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
     t.string "email"
+    t.string "password_digest"
     t.string "provider", default: "0"
     t.string "uid", default: "0"
-    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "notes", "projects"
-  add_foreign_key "project_tasks", "projects"
-  add_foreign_key "project_tasks", "tasks"
-  add_foreign_key "tasks", "projects"
+  add_foreign_key "job_applications", "companies"
+  add_foreign_key "job_applications", "users"
 end

@@ -7,11 +7,13 @@ class Project < ActiveRecord::Base
     accepts_nested_attributes_for :notes, :reject_if => :all_blank, :allow_destroy => true
     accepts_nested_attributes_for :project_tasks, :reject_if => :all_blank, :allow_destroy => true
 
+    validates :name, :description, :start_date, :due_date, :project_tasks, :notes, presence: true
+
     scope :by_task, -> (task) { joins(:tasks).where("tasks.name = ?", task) }
 
 
 
-    validates :name, :description, :start_date, :due_date, presence: true
+
 
 
 

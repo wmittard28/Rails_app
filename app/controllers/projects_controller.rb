@@ -12,11 +12,11 @@ class ProjectsController < ApplicationController
     end
 
     def create
+        current_user
         @project = Project.new(project_params)
-        @project.user = current_user
 
         if @project.save
-            redirect_to project_path(@project)
+        redirect_to projects_path(@project)
         else
             render :new
         end
@@ -43,14 +43,10 @@ class ProjectsController < ApplicationController
 
     private
 
-    def set_project
-        @project = Project.find(params[:id])
-    end
-
     def project_params
         params.require(:project).permit(:name, :description, :start_date, :due_date,
-        project_tasks_attributes: [:id, :task_name, :_destroy],
-        notes_attributes: [:id, _destroy])
+        project_tasks_attributes: [:id, :task_name],
+        notes_attributes: [:id, :step])
     end
 
     def find_project

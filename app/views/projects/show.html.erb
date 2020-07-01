@@ -19,12 +19,6 @@
         </div>
 
 
-        <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <h5>Category:</h5>
-          <%= @project.category %>
-        </li>
-
       <li class="list-group-item">
         <h5>Start Date:</h5>
         <p><%= @project.start_date%></p>
@@ -34,6 +28,31 @@
         <h5>Due Date:</h5>
         <p><%=@project.due_date %></p>
         </li>
+
+        <div class="columns">
+    <div class="column is-half">
+      <div id="tasks-styling">
+        <p class="title">Tasks</p>
+        <ul id="js-tasks-list">
+          <% @project.project_tasks.each do |ri| %>
+            <li><%= ri.project_line_detail %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="column is-half">
+      <div id="notes-styling">
+        <p class="title">Notes</p>
+        <ol id="js-tasks-list">
+          <% @project.notes.each do |note| %>
+            <li>
+              <%= note.step %>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    </div>
+  </div>
 
 
           <%= link_to "EDIT", edit_project_path, class: "btn btn-primary" %><br>
