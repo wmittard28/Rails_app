@@ -1,0 +1,14 @@
+<div class="nested-fields field">
+  <div class="field has-addons">
+    <%= link_to_remove_association f, class: 'button is-primary is-light', id: "x-icon" do %>
+      <i class="fas fa-times"></i>
+    <% end %>
+
+    <div class="field">
+      <%= f.text_field :task_name, class: "input", placeholder: "Task" %>
+    </div>
+
+
+
+  </div>
+</div>

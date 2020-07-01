@@ -10,19 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_224225) do
+ActiveRecord::Schema.define(version: 2020_07_01_135324) do
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
+  create_table "notes", force: :cascade do |t|
+    t.text "step"
+    t.integer "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_notes_on_project_id"
+  end
+
+  create_table "project_categories", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "project_tasks", force: :cascade do |t|
+    t.integer "task_id"
+    t.integer "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_project_tasks_on_project_id"
+    t.index ["task_id"], name: "index_project_tasks_on_task_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "category"
     t.string "name"
-    t.integer "status"
     t.string "description"
     t.date "start_date"
     t.date "due_date"
@@ -34,11 +50,10 @@ ActiveRecord::Schema.define(version: 2020_06_30_224225) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
-    t.string "description"
-    t.integer "status"
-    t.date "due_date"
+    t.integer "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,4 +66,8 @@ ActiveRecord::Schema.define(version: 2020_06_30_224225) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "notes", "projects"
+  add_foreign_key "project_tasks", "projects"
+  add_foreign_key "project_tasks", "tasks"
+  add_foreign_key "tasks", "projects"
 end

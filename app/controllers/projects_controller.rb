@@ -1,16 +1,19 @@
 class ProjectsController < ApplicationController
-    before_action :set_project, only: [:show, :edit, :update, :destroy]
+    before_action :find_project, only: [:show, :edit, :update, :destroy]
 
     def index
-        @projects = Project.all
+        @projects = Project.all.order("created_at DESC")
     end
 
     def new
         @project = Project.new
+        @project.project_tasks.build.build_task
+        @project.notes.build
     end
 
     def create
         @project = Project.new(project_params)
+        @project.user = current_user
 
         if @project.save
             redirect_to project_path(@project)
@@ -20,7 +23,6 @@ class ProjectsController < ApplicationController
     end
 
     def show
-        @category = Category.all
     end
 
     def edit
@@ -46,7 +48,13 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-        params.require(:project).permit(:name, :description, :category, :start_date, :due_date)
+        params.require(:project).permit(:name, :description, :start_date, :due_date,
+        project_tasks_attributes: [:id, :task_name, :_destroy],
+        notes_attributes: [:id, _destroy])
+    end
+
+    def find_project
+        @project = Project.find(params[:id])
     end
 
 end

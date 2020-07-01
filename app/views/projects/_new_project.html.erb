@@ -8,7 +8,7 @@
     <body>
 
     <div class="field">
-    <h5>Title:</h5>
+    <h5>Name:</h5>
     <%= f.text_field :name, size: 50, :class => "form-control"%>
   </div><br>
 
@@ -16,11 +16,6 @@
     <h5>Description:</h5>
     <%= f.text_area :description, size: 50, :class => "form-control"%>
   </div><br>
-
-  <div class="field">
-  <h5>Category:</h5>
-  <%= f.collection_select :category, Category.all, :id , :name, {:prompt => true}, {class: "form-control"} %>
-</div><br>
 
   <div class="field">
   <%= f.label :start_date %><br>
@@ -31,6 +26,32 @@
   <%= f.label :end_date %><br>
   <%= f.date_select :due_date, {}, {:class => "form-control custom"} %>
 </div><br>
+
+<div class="field">
+  <h5>Task:</h5>
+  <div id="tasks">
+            <%= f.fields_for :project_tasks do |project_task| %>
+              <div class="field">
+                <%= render 'project_task_fields', f: project_task %>
+              </div>
+            <% end %>
+            <br />
+            <%= link_to_add_association 'Add Task', f, :project_tasks, class: 'button is-light' %>
+          </div>
+</div><br>
+
+<div class="field">
+<h5>Notes:</h5>
+<div id="notes">
+            <%= f.fields_for :notes do |note| %>
+              <%= render 'note_fields', f: note %>
+            <% end %>
+            <div class="links">
+              <br />
+              <%= link_to_add_association 'Add notes', f, :notes, class: 'button is-light' %>
+            </div>
+            </div>
+
 
 
 

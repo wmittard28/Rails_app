@@ -2,8 +2,7 @@ class User < ActiveRecord::Base
 
     has_secure_password
     has_many :projects
-    has_many :notes
-    has_many :tags
+  
 
     validates :email, presence: true, uniqueness: true
     validates :password, presence: true
@@ -22,4 +21,4 @@ class User < ActiveRecord::Base
           user.password = SecureRandom.hex
         end
     end
-end 
+end

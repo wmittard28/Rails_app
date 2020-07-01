@@ -3,6 +3,10 @@
 
  <body>
 
+  <%= javascript_include_tag :cocoon %>
+  <%= csrf_meta_tags %>
+
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand font-weight-bold" href="/posts">ProjectU</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
@@ -27,10 +31,17 @@
   </ul>
   </nav>
 
+  <% if !!flash[:message] %>
+      <div class="alert alert-dismissible alert-primary" style="max-width: 25rem; min-width: 20rem; position: fixed; right:2px; top:62px; z-index: 99">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong><%= flash[:message] %></strong>
+      </div>
+    <% end %>
+
+
   <div id="app-container">
     <%= yield %>
 
     </body>
 
     </html>
-
