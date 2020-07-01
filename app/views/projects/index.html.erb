@@ -6,9 +6,29 @@
        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
     <body>
+    <br>
 
 
+    <h1>All Projects:</h1><br>
+
+<div class="row" id="projectsIndex">
+  <% @projects.each do |project| %>
+    <div>
+      <div class="card border-light" style="max-width: 15rem; min-width: 15rem; margin: 1rem;">
+        <div class="project card-body">
+          <h5 class="projectNAME"><%= link_to project.name, project_path(project)%> </h5>
+
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+    <div style="text-align: center">
     <a class="btn btn-primary"  href="/projects/new">New Project</a>
+    </div>
+
+
 
 
 

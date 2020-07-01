@@ -13,7 +13,7 @@ class UsersController < ApplicationController
             render :new
         else
             session[:user_id] = @user.id
-            redirect_to user_path(@user)
+            redirect_to projects_path(@projects)
         end
     end
 

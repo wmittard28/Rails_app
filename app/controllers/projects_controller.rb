@@ -20,17 +20,23 @@ class ProjectsController < ApplicationController
     end
 
     def show
+        @category = Category.all
     end
 
     def edit
     end
 
     def update
-        if @project.update(project)
+        if @project.update(project_params)
             redirect_to projects_path(@project)
         else
             render :edit
         end
+    end
+
+    def destroy
+        @project.destroy
+        redirect_to project_path
     end
 
     private
@@ -40,9 +46,7 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-        params.require(:project).permit(:name, :description, :start_date, :end_date)
+        params.require(:project).permit(:name, :description, :category, :start_date, :due_date)
     end
 
 end
-
-

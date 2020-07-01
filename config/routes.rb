@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  Rails.application.routes.draw do
     root to: "users#index"
 
 
@@ -17,15 +16,15 @@ Rails.application.routes.draw do
     get 'auth/failure', to: redirect('/')
     get "/auth/:provider/callback" => "sessions#omnilogin"
 
-    resources :tags
-
-    scope "/jobs" do
-      get'/new', to: 'jobs#quick_new_jobs', as: "quick_new_job"
-      post'/', to: 'jobs#create', as: "post_quick_new_job"
-      get'/all', to: 'jobs#all', as: "get_all_jobs"
-    end
-
     resources :projects
-    
-  end
+
+    # scope "/jobs" do
+    #   get'/new', to: 'jobs#quick_new_jobs', as: "quick_new_job"
+    #   post'/', to: 'jobs#create', as: "post_quick_new_job"
+    #   get'/all', to: 'jobs#all', as: "get_all_jobs"
+    # end
+
+
+
+
 end
